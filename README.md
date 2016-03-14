@@ -23,7 +23,7 @@ Gitはファイルだけでなくリポジトリ(「.git」フォルダ)をロ�
 >スナップショットで、差分ではない  
 >ファイルに変更が無い場合は、既に格納してある、以前の同一のファイルへのリンクを格納します。  
 >ほとんど全ての操作がローカル Gitはサーバーに履歴を取得しに行って表示する必要がありません。  
->直接にローカル・データベースからそれを読むだけです。これは、プロジェクトの履歴をほとんど即座に知るということです。  
+>直接にローカル・データベースからそれを読むだけです。  
 
 ## SSLのバージョンを確認。確認だけじゃ無く更新。
 
@@ -52,7 +52,7 @@ GitHub(Git)使うにはOpenSSLの脆弱性注意。OS毎のセキュリティア
 >~/.ssh/id&#95;rsa 秘密鍵ファイルのデフォルトの名前としてこれが提案されます。  
 >&#45;f ファイル名 鍵を格納するファイル名を指定します。  
 >&#45;t 生成する鍵の種類を指定します。プロトコルバージョン 2 で使う"dsa","ecdsa","ed25519"または"rsa"があります。  
->コメントは"user@host"の形に初期化されますが、-c オプションを使えば変更することができます。
+>コメントは"user@host"の形に初期化されますが、-c オプションを使えば変更することができます。  
 >&#40;訳注: SSH2 の鍵にはコメントはありません&#41;  
 
 鍵を作ったら右クリックからのプロパティとかで書き込み禁止。  
@@ -96,7 +96,7 @@ GitHubに登録したメールアドレスとユーザIDをローカルのGitに
 [1.5 使い始める - 最初のGitの構成](https://git-scm.com/book/ja/v1/%E4%BD%BF%E3%81%84%E5%A7%8B%E3%82%81%E3%82%8B-%E6%9C%80%E5%88%9D%E3%81%AEGit%E3%81%AE%E6%A7%8B%E6%88%90)
 >--globalオプションを指定するのであれば、この操作を行なう必要はたった一度だけです。  
 >違う名前とE&#45;mailアドレスを特定のプロジェクトで上書きしたいのであれば、  
->そのプロジェクトの&#40;訳者注：Gitディレクトリの&#41;中で、--globalオプション無しでこのコマンドを実行することができます。  
+>プロジェクトの&#40;訳者注：Gitディレクトリの&#41;中で、--globalオプション無しでこのコマンドを実行することができます。  
 
 ## WebのGitHubに公開鍵.pubを登録
 
@@ -138,7 +138,7 @@ IPアドレスもだけど「fingerprint」公開鍵にも注目。「github.com
 [Githubによる、オープンソースライセンスの選び方](http://www.catch.jp/oss-license/2013/09/10/github/)
 >なにも明示されていないと、自由に使ってほしくないのでライセンスを適用していないのか、区別が付きません。  
 >現在のGithubでは、新しいレポジトリを作るときに公開レポジトリ(Public)を選択すると、  
->Githubで無視させるファイル(gitignore)とライセンスを選択できるようになっています。  
+>Gitで無視させるファイル(gitignore)とライセンスを選択できるようになっています。  
 >Githubが設置したライセンス選択サイト「Choosing an OSS license doesn’t need to be scary」  
 >オープンソースにするつもりがないにも関わらず、公開リポジトリを利用している人に、注意を促しています。  
 >パブリックリポジトリで公開する場合、あなたは、Githubの利用条件に同意して、  
@@ -148,13 +148,14 @@ IPアドレスもだけど「fingerprint」公開鍵にも注目。「github.com
 ### 開発言語を選択すると「.gitignore」が自動生成され余分なファイルがリポジトリに混入するのを防ぎます。
 
 例えばPythonを選択すると「&#42;.py&#91;cod&#93;」が書き込まれますが「.pyc」「.pyo」「.pyd」の意味です。  
+
 [What is the difference between &#34;py&#91;cod&#93;&#34; and &#34;pyc&#34; in .gitignore notation?](http://stackoverflow.com/questions/18729510/what-is-the-difference-between-pycod-and-pyc-in-gitignore-notation)
 >You are safe to remove the .pyc entry from your .gitignore, since py&#91;cod&#93; will cover it.
 >The square brackets are for matching any one of the characters, so it matches .pyc, .pyo and .pyd.
 
 ### 「README.md」は「reddit」みたいに「半角スペース2つで改行」。
 
-「.md」ファイルはGitHub上でも編集できるけど、「pull」「commit」「push」の練習に使う。  
+「.md」ファイルはGitHub上でも編集できるけど、「commit」「push」の練習に使う。  
 コード表示だと改行自動だけど引用には半角スペース改行が必要なので注意。
 
 [README.mdファイル。マークダウン記法まとめ](http://codechord.com/2012/01/readme-markdown/)
@@ -165,7 +166,7 @@ IPアドレスもだけど「fingerprint」公開鍵にも注目。「github.com
 >リスト 行頭にアスタリスク&#40;&#42;&#41;か、番号ピリオド&#40;1.&#41;  
 >強調 アスタリスク&#40;&#42;&#41;またはアンダーバー&#40;&#95;&#41;で囲う  
 >リンク &#91;リンクのテキスト&#93;&#40;リンクのアドレス&#34;リンクのタイトル&#34;&#41;リンクのタイトルは省略可能。  
->画像 先頭にビックリマーク &#33;&#91;Alt text&#93;&#40;/path/to/img.jpg&#34;Optional title&#34;&#41;  
+>画像 先頭にビックリマーク &#33;&#91;Alt text&#93;&#40;/path/img.jpg&#34;Optional title&#34;&#41;  
 >水平線 3つ以上のハイフン、アスタリスク、アンダースコアをならべる  
 >その他の注意 &amp;マークなどは「&amp;amp&#59;」に変換しておく。  
 
@@ -178,7 +179,7 @@ IPアドレスもだけど「fingerprint」公開鍵にも注目。「github.com
     # cd /mnt/sdb1/github
 
 リポジトリURL…ではなく「config」で設定したホスト名を使う。  
-「configホスト名:ユーザID/.git」このフォーマット後述の「pull」の説明でも使います。  
+「configホスト名:ユーザID/.git」このフォーマット後述の「push」の説明でも使います。  
 「git clone」を実行するとリポジトリ名でフォルダが作成される。  
 
     # git clone github:ooblog/test.git
@@ -256,7 +257,7 @@ IPアドレスもだけど「fingerprint」公開鍵にも注目。「github.com
 ## 「push」できたか確認。
 
 リポジトリのWebページを開くと「README.md」「Initial commit」のテキストが、  
-「git commit &#45;a &#45;m」でコミットしたテキストに変化してれば「pull」成功。  
+「git commit &#45;a &#45;m」でコミットしたテキストに変化してれば「push」成功。  
 
 [ooblog/test](https://github.com/ooblog/test)
 
