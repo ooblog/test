@@ -137,7 +137,7 @@ underscoreとかエスケープ(文字参照)する必要がある。「kantray�
 
 ## 「commit」して「push」する。
 
-例えば「README.md」を編集すると「git status」が変化する。
+### 例えば「README.md」を編集すると「git status」が変化する。
 
     # cd test
     # git status
@@ -149,6 +149,11 @@ underscoreとかエスケープ(文字参照)する必要がある。「kantray�
     #	modified:   README.md
     #
     no changes added to commit (use "git add" and/or "git commit -a")
+
+    # git commit &#45;a &#45;m "「git clone」の辺りまで執筆。"
+    &#91;master bf8119d&#93; 「git clone」の辺りまで執筆。
+     1 file changed, 154 insertions(+)
+
 
 
 今それ勉強中。コミットとかできてから書く予定。  
