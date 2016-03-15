@@ -241,7 +241,7 @@ IPアドレスもだけど「fingerprint」公開鍵にも注目。「github.com
 
 ### 「push」する前にコミットの内容を修正する。
 
-もしコミットのコメントを修正する場合は「reset  &#45;&#45soft」して再度コミット。  
+もしコミットのコメントを修正する場合は「reset &#45;&#45soft」して再度コミット。  
 
     # cd test
     #
@@ -253,20 +253,28 @@ IPアドレスもだけど「fingerprint」公開鍵にも注目。「github.com
     # Your branch is ahead of 'origin/master' by 8 commits.
     #
     nothing to commit (working directory clean)
+
     # git reset --soft HEAD^
     # git status
     # On branch master
     # Your branch is ahead of 'origin/master' by 7 commits.
-    #
+
     # Changes to be committed:
     #   (use "git reset HEAD <file>..." to unstage)
     #
     #	modified:   README.md
-    #
+
     # git commit -a -m "コミット内容修正の項(とファイルの追加削除の項)の追加。"
     [master fcec3c2] コミット内容修正の項(とファイルの追加削除の項)の追加。
      1 file changed, 44 insertions(+), 5 deletions(-)
+    #
+    # git status
+    # On branch master
+    # Your branch is ahead of 'origin/master' by 8 commits.
+    #
+    nothing to commit (working directory clean)
 
+「reset」でコミット数が減った事が確認できると思う。  
 
 [さっきの取り消したい！って時のGitコマンドまとめ](http://qiita.com/kansiho/items/2bacecdb95d752cb38b7)
 >直前の間違ったコミットを取り消したい。  
