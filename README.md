@@ -283,7 +283,7 @@ IPアドレスもだけど「fingerprint」公開鍵にも注目。「github.com
 >git reset &#45;&#45;hard :コミットを取り消し&#38;ワークディレクトリの内容も書き換え。  
 >git revert コミットによって加えられた変更を元に戻してその結果を新しいコミットとして追加  
 
-### ローカル「Git」のbranchをに「GitHub」に「push」する。
+### ローカル「Git」のbranchを「GitHub」に「push」する。
 
 「git clone」した同じリポジトリに今度は「git push」する(「origin」使わない方法で説明)。  
 「configホスト名:ユーザID/.git」このフォーマット先述の「clone」の説明でも使いました。  
