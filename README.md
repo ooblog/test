@@ -59,7 +59,7 @@ GitHub(Git)使うにはOpenSSLの脆弱性注意。OS毎のセキュリティア
 
 ### 「~/.ssh/config」ファイル作成して鍵を管理する。
 
-「config」ファイルをエディタで作成する。「github」の名前でサイト名と鍵名の管理が用意に。  
+「config」ファイルをエディタで作成する。「github」の名前でサイト名と鍵名の管理が容易に。  
 ホスト毎にPythonみたく空白インデント。  
 
     Host github
@@ -75,7 +75,7 @@ GitHub(Git)使うにはOpenSSLの脆弱性注意。OS毎のセキュリティア
 >Host &#40;ホスト&#41; 設定項目を、ここで指定されたパターンのどれかにマッチするホストだけに制限します。  
 >HostName &#40;実際のホスト名&#41; 実際にログインするホスト名を指定します。数字の IP アドレスでもかまいません  
 >IdentityFile &#40;identityファイル&#41; 認証時にどのidentityを提供するかを選択することができます。  
->IdentitiesOnly &#40;ファイルに格納された秘密鍵のみを使用&#41; configファイルで指定された秘密鍵のみを使用するよう指定します。  
+>IdentitiesOnly &#40;格納された秘密鍵のみを使用&#41; configファイルで指定された秘密鍵のみを使用するよう指定します。  
 >Compression &#40;圧縮&#41; データ圧縮をおこなうかどうかを指定します。  
 >Port &#40;ポート番号&#41; リモートホストに接続するときのポート番号を指定します。デフォルトのポートは 22 です。  
 
@@ -239,6 +239,42 @@ IPアドレスもだけど「fingerprint」公開鍵にも注目。「github.com
     # On branch master
     # Your branch is ahead of 'origin/master' by 2 commits.
 
+### 「push」する前にコミットの内容を修正する。
+
+もしコミットのコメントを修正する場合は「reset  &#45;&#45soft」して再度コミット。  
+
+    # cd test
+    #
+    # git commit -a -m "コミット内容修正の項目追加。"
+    [master abd450c] コミット内容修正の項目追加。
+     1 file changed, 59 insertions(+), 4 deletions(-)
+    # git status
+    # On branch master
+    # Your branch is ahead of 'origin/master' by 8 commits.
+    #
+    nothing to commit (working directory clean)
+    # git reset --soft HEAD^
+    # git status
+    # On branch master
+    # Your branch is ahead of 'origin/master' by 7 commits.
+    #
+    # Changes to be committed:
+    #   (use "git reset HEAD <file>..." to unstage)
+    #
+    #	modified:   README.md
+    #
+    # git commit -a -m "コミット内容修正の項(とファイルの追加削除の項)の追加。"
+    [master fcec3c2] コミット内容修正の項(とファイルの追加削除の項)の追加。
+     1 file changed, 44 insertions(+), 5 deletions(-)
+
+
+[さっきの取り消したい！って時のGitコマンドまとめ](http://qiita.com/kansiho/items/2bacecdb95d752cb38b7)
+>直前の間違ったコミットを取り消したい。  
+>　git reset &#45;&#45;soft HEAD^  
+>git reset &#45;&#45;soft :ワークディレクトリの内容はそのままでコミットだけを取り消す。  
+>git reset &#45;&#45;hard :コミットを取り消し&#38;ワークディレクトリの内容も書き換え。  
+>git revert コミットによって加えられた変更を元に戻してその結果を新しいコミットとして追加  
+
 ### ローカル「Git」のbranchをに「GitHub」に「push」する。
 
 「git clone」した同じリポジトリに今度は「git push」する(「origin」使わない方法で説明)。  
@@ -264,14 +300,22 @@ IPアドレスもだけど「fingerprint」公開鍵にも注目。「github.com
 ちなリポジトリは「Download ZIP」ボタンでもダウンロードができます。  
 Git使えない人から「ZIPでくれ」と言われても「そこにZIPがあるじゃろ？」と挨拶できますね。  
 
-## リポジトリにファイルを追加する。
+## リポジトリにファイルを追加削除もしくはファイル名をリネームする。  
 
-まだですー。  
+ファイルの追加削除はある程度自動追跡されるっぽい。  
+問題点が見つかったら後から修正かも。  
+
+[Git で管理しているファイルのリネームを git mv でなく mv してしまったときにどうなるのか調べてみた](http://qiita.com/akisute3@github/items/7705844c5e255b8fa3ae)
+>mv の後に git add . をすると、
+>    消失している b.txt が削除対象となり
+>    新規作成されている new&#95;b.txt がトラックされる
+>ため、結局 git mv とやってることは変わらないということです。
+>&#40;ちなみに git add . は Git 2.0 から git add -A . と同じ意味になりました&#41;。
+>なので、普段から git add -A . をする人は、安心して mv 使っちゃって大丈夫です。
 
 ## あとがき＆今後の予定。
 
 執筆者もGitHub勉強中。  
 GitについてググってもGitHub以前の情報だったり断片的だったりvi前提だったり不便だったのでまとめた。  
-「使えるようになってもらうマニュアル」とか言いつつ、ファイルの追加削除はまだ書いてない。後日後日。  
 ブランチ管理とかGitHub１日目の内容じゃないし知らないので、もし書くとしても別mdだと思う。  
 
