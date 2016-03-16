@@ -129,6 +129,8 @@ IPアドレスもだけど「fingerprint」公開鍵にも注目。「github.com
 
 ## 「git clone」の方が簡単なので「GitHub」でリポジトリを作る。
 
+[https://github.com/new](https://github.com/new "Create a New Repository")
+
 「GitHub」でリポジトリを作ると「LICENSE」ファイルなどが自動作成されるので便利。  
 
 ### 「LICENSE」を選択する&#40;西暦とユーザー名が自動で入力されます&#41;。
@@ -170,7 +172,7 @@ IPアドレスもだけど「fingerprint」公開鍵にも注目。「github.com
 >水平線 3つ以上のハイフン、アスタリスク、アンダースコアをならべる  
 >その他の注意 &amp;マークなどは「&amp;amp&#59;」に変換しておく。  
 
-「kantray」(GitHub版準備中)を使うと「照&#95;⇔&#38;#95&#59;」とかの機能あるのでお勧め。  
+「[kantray](https://github.com/ooblog/LTsv9kantray)」を使うと「照&#95;⇔&#38;#95&#59;」とかの機能あるのでお勧め。  
 
 ### 「GitHub」で作ったリポジトリをローカルの「Git」に「clone」する。
 
@@ -238,6 +240,19 @@ IPアドレスもだけど「fingerprint」公開鍵にも注目。「github.com
     # git status
     # On branch master
     # Your branch is ahead of 'origin/master' by 2 commits.
+
+### 「push」する前にコミットの内容を確認する。
+
+「git log」でコミットの一覧が表示できます。
+
+    # cd test
+    # git log
+
+[puppylinux で git log の表示がでない](http://qiita.com/alucky4416/items/fc27d04ffc8785b50a1f)
+>git config で pager に less を設定すると表示されるようになった。  
+>git config --global core.pager less  
+>git config --global --list  
+>core.pager=less <--- これが表示されていればセットされている。  
 
 ### 「push」する前にコミットの内容を修正する。
 
@@ -310,20 +325,29 @@ Git使えない人から「ZIPでくれ」と言われても「そこにZIPが�
 
 ## リポジトリにファイルを追加削除もしくはファイル名をリネームする。  
 
-ファイルの追加削除はある程度自動追跡されるっぽい。  
-問題点が見つかったら後から修正かも。  
+リポジトリフォルダにファイルを追加する前に「.gitignore」に公開したくないファイル名を登録。  
+フォルダにファイルを追加したら「git add .」。  
+追加したファイルを取り除く時は「git rm &#45;cached」。  
 
 [Git で管理しているファイルのリネームを git mv でなく mv してしまったときにどうなるのか調べてみた](http://qiita.com/akisute3@github/items/7705844c5e255b8fa3ae)
->mv の後に git add . をすると、
->    消失している b.txt が削除対象となり
->    新規作成されている new&#95;b.txt がトラックされる
->ため、結局 git mv とやってることは変わらないということです。
->&#40;ちなみに git add . は Git 2.0 から git add -A . と同じ意味になりました&#41;。
->なので、普段から git add -A . をする人は、安心して mv 使っちゃって大丈夫です。
+>mv の後に git add . をすると、  
+>    消失している b.txt が削除対象となり  
+>    新規作成されている new&#95;b.txt がトラックされる  
+>ため、結局 git mv とやってることは変わらないということです。  
+>&#40;ちなみに git add . は Git 2.0 から git add -A . と同じ意味になりました&#41;。  
+>なので、普段から git add -A . をする人は、安心して mv 使っちゃって大丈夫です。  
+
+[gitの管理対象から特定のファイル、ディレクトリを削除する](http://qiita.com/ytkt/items/a2afd6be8e4f06c1ea25)
+>.gitignore書き忘れて add &#38; commit しちゃったとかよくありますよね。  
+>-cachedオプションを付けることにより、ファイルを残したまま管理対象から外すことができます。  
+>$ git rm &#45;cached &#91;ファイル&#93;  
+>ファイルを残した場合は必ず.gitignoreに追記するように。  
+>ファイルも一緒に削除したいとき〜  
+>$ git rm &#91;削除したいファイル&#93;  
 
 ## あとがき＆今後の予定。
 
 執筆者もGitHub勉強中。  
 GitについてググってもGitHub以前の情報だったり断片的だったりvi前提だったり不便だったのでまとめた。  
-ブランチ管理とかGitHub１日目の内容じゃないし知らないので、もし書くとしても別mdだと思う。  
+ブランチ管理とか午後の部という形で別mdだと思う。  
 
