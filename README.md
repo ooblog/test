@@ -25,6 +25,18 @@ Gitはファイルだけでなくリポジトリ(「.git」フォルダ)をロ�
 >ほとんど全ての操作がローカル Gitはサーバーに履歴を取得しに行って表示する必要がありません。  
 >直接にローカル・データベースからそれを読むだけです。  
 
+## コマンド入力を多用するので、OS毎の端末起動方法も確認。
+
+[PuppyHelp/Tips＆トリック/端末の一発起動 - Puppy Linux 日本語版 Wiki](https://osdn.jp/projects/puppylinux-jp/wiki/PuppyHelp%2FTips%EF%BC%86%E3%83%88%E3%83%AA%E3%83%83%E3%82%AF%2F%E7%AB%AF%E6%9C%AB%E3%81%AE%E4%B8%80%E7%99%BA%E8%B5%B7%E5%8B%95)  
+>ROX でディレクトリの階層を降りてゆきます。  
+>「~」と書かれているキーを押してください（訳注：日本語キーボードだと Shift＋＠ キー）。  
+>端末画面が開き、呼び出されたディレクトリがカレントディレクトリになっています。  
+
+[コマンドプロンプトで目的のフォルダに一発で移動する方法](http://www.koikikukan.com/archives/2014/03/18-015555.php)  
+>まずエクスプローラー上で移動したいフォルダを表示。  
+>一覧画面の部分でShiftキーを押しながら右クリックして「コマンドウィンドウをここで開く」を選択。  
+>これで目的のフォルダに移動した状態のコマンドプロンプトが開きます。  
+
 ## SSLのバージョンを確認。確認だけじゃ無く更新。
 
 GitHubはSSH鍵を使ってファイルをやり取りする。OpenSSHなどSSHプロトコルはSSLを使う。  
@@ -138,7 +150,6 @@ IPアドレスもだけど「fingerprint」公開鍵にも注目。「github.com
 ライセンスは訴訟回避の法的おまじない。ここは空気を読んで既存のオープンソースライセンスに寄せておくのがベター。  
 
 [Githubによる、オープンソースライセンスの選び方](http://www.catch.jp/oss-license/2013/09/10/github/)
->なにも明示されていないと、自由に使ってほしくないのでライセンスを適用していないのか、区別が付きません。  
 >現在のGithubでは、新しいレポジトリを作るときに公開レポジトリ(Public)を選択すると、  
 >Gitで無視させるファイル(gitignore)とライセンスを選択できるようになっています。  
 >Githubが設置したライセンス選択サイト「Choosing an OSS license doesn’t need to be scary」  
@@ -355,7 +366,7 @@ Git使えない人から「ZIPでくれ」と言われても「そこにZIPが�
 
 いわゆるホームページ作成目的&#40;ブログだけじゃできない事試したい&#41;でGitHub使ってみるって人いるかもなので先に注意。  
 
-### pagesの名前空間は衝突する。
+### GitHub Pagesの名前空間は衝突する。
 
 公式にユーザーページ&#40;master&#41;とプロジェクトページ&#40;gh-pages&#41;が被ったらどうなるかまで書いてない気がする。  
 
@@ -365,14 +376,126 @@ Git使えない人から「ZIPでくれ」と言われても「そこにZIPが�
 
 [github pagesとjekyllを今さら練習](http://aligach.net/diary/20120716.html)
 >github pages は最終的に一つのディレクトリツリー上に展開されているようだ。  
->つまり username.github.com の github pages を作る際には各 repos の名前空間が conflict することになるので注意が必要。  
+>username.github.com の github pages を作る際には各 repos の名前空間が conflict することになるので注意が必要。  
 
 つまりOrganizationでもない限り、Webは「master」&#40;username.github.io&#41;一括管理でいいと思います。  
 ブランチ切るほどでもないプロジェクト(リポジトリ)なのにブランチ管理で悩むリソース消費を回避する方がベターかと。  
 
-### ブログやSNSでいいやとか思ってた時期とかあったのでHTMLの書き方忘れたorz
+### Pages&#40;username.github.io&#41;の場合「Initialize this repository with a README」にチェックを入れない。
 
-HTMLの書き方というか、サイトを新規作成するなら思いきって古いブラウザ対応のコストカットでいいんじゃないでしょうか。  
+「README.md」とか無い空のリポジトリが作成された場合「Quick setup」の画面とかでる。  
+空ですよ警告&#40;empty repository.&#41;とか気にせず「git clone github:username/username.github.io.git」。  
+リポジトリがクローンできたら後はコミットしてプッシュ。やることは同じ。  
+
+    # cd /mnt/sdb1/github/
+    # git clone github:ooblog/ooblog.github.io.git
+    Cloning into 'ooblog.github.io'...
+    warning: You appear to have cloned an empty repository.
+    # cd ooblog.github.io
+    # git add index.html
+    # git commit -a -m "GitHub Pages 動作確認テスト。(とりあえず「git add index.html」)"
+    [master (root-commit) 5d5a248] GitHub Pages 動作確認テスト。(とりあえず「git add index.html」)
+     1 file changed, 18 insertions(+)
+     create mode 100644 index.html
+    # git push github:ooblog/ooblog.github.io.git master
+    Counting objects: 3, done.
+    Compressing objects: 100% (2/2), done.
+    Writing objects: 100% (3/3), 534 bytes, done.
+    Total 3 (delta 0), reused 0 (delta 0)
+    To github:ooblog/ooblog.github.io.git
+     * [new branch]      master -> master
+
+### 「index.html」に加え「404.html」もルートフォルダに必要。  
+
+[GitHub Pages - Websites for you and your projects, hosted directly from your GitHub repository. Just edit, push, and your changes are live.](https://pages.github.com/)  
+[Creating a custom 404 page for your GitHub Pages site - User Documentation](https://help.github.com/articles/creating-a-custom-404-page-for-your-github-pages-site/)  
+
+とりあえずのたたき台でも２枚HTMLを作るのでCSSも作っておくと便利。
+
+#### サンプル「index.html」
+
+    <!DOCTYPE html>
+    <html lang="ja"><head>
+     <meta charset="UTF-8" />
+     <title>GitHub Pages 動作確認テスト。(ooblog.github.io)</title>
+     <link rel="stylesheet" type="text/css" href="index.css" />
+    </head><body>
+     <header>
+      <p><a href="http://ooblog.github.io/" rel="publisher">ooblog.github.io</a> &#62; index.html</p>
+     </header>
+     <section>
+      <article>
+       <H1>GitHub Pages 動作確認テスト。</H1>
+       <p>HTML5のタグを使用。</p>
+      </article>
+      <article>
+       <H2>フォント「kantray5x5comic.woff」動作確認テスト。</H2>
+       <pre class="kantrayFont">
+        @font-face {
+          font-family: "kantray5x5comic";
+          src: url("kantray5x5comic.woff") format('woff');
+        }
+        .kantrayFont {
+          font-family: "kantray5x5comic";
+        }
+       </pre>
+      </article>
+     </section>
+     <footer>
+      <p><a href="https://github.com/ooblog" rel="author">github.com/ooblog</a></p>
+     </footer>
+    </body></html>
+
+#### サンプル「index.css」
+
+    @font-face {
+      font-family: "kantray5x5comic";
+      src: url("kantray5x5comic.woff") format('woff');
+    }
+    .kantrayFont {
+      font-family: "kantray5x5comic";
+    }
+    header{
+      border:1px gray dotted;
+    }
+    section{
+      margin-top:1em;
+      border:2px black solid;
+      padding:1em;
+    }
+    footer{
+      margin-top:1em;
+      border:1px gray dotted;
+      text-align: center;
+    }
+
+#### サンプル「404.html」
+
+    <!DOCTYPE html>
+    <html lang="ja"><head>
+     <meta charset="UTF-8" />
+     <title>404 not Found。(ooblog.github.io)</title>
+     <link rel="stylesheet" type="text/css" href="index.css" />
+    </head><body>
+     <header>
+      <p><a href="http://ooblog.github.io/" rel="publisher">ooblog.github.io</a> &#62; 404.html</p>
+     </header>
+     <section>
+      <article>
+       <H1>404 not Found。</H1>
+       <p>
+        存在しないHTMLページを開こうとした模様。一旦<a href="http://ooblog.github.io/" rel="author">ooblog.github.io</a>に戻ってみましょう。<br />
+        </p>
+      </article>
+     </section>
+     <footer>
+      <p><a href="https://github.com/ooblog" rel="author">github.com/ooblog</a></p>
+     </footer>
+    </body></html>
+
+### ブログやSNSでいいやとか思ってた時期とかあったのでHTMLの書き方忘れてたorz
+
+HTMLの書き方というか、新規のサイトは思いきって古いブラウザ対応のコストカットでいいんじゃないでしょうか。  
 
 [レガシーブラウザのサポートは本日で 終了です。～さようならOld IE～](https://blogs.msdn.microsoft.com/osamum/2016/01/12/12424/)  
 [HTML5 における HTML4 からの変更点](http://standards.mitsue.co.jp/resources/w3c/TR/html5-diff/)  
@@ -381,14 +504,8 @@ HTMLの書き方というか、サイトを新規作成するなら思いきっ�
 あとHTMLを手書きではなくプログラミングツールで生成する方法とかあるけどGitとは別の話。  
 
 [静的サイト生成という「古くて新しい手法」の復活](http://mojix.org/2012/12/07/static-site-generation)
->「静的サイト生成」とは、手作りで「静的サイト」を作るのではなくて、HTMLファイルをプログラム的に「生成」する手法を指す。  
-
-### 「index.html」と「404.html」がルートフォルダに必要。  
-
-[GitHub Pages - Websites for you and your projects, hosted directly from your GitHub repository. Just edit, push, and your changes are live.]https://pages.github.com/)  
-[Creating a custom 404 page for your GitHub Pages site - User Documentation](https://help.github.com/articles/creating-a-custom-404-page-for-your-github-pages-site/)  
-
-サンプルHTMLは実験してから後で書き足す。
+>「静的サイト生成」とは、手作りで「静的サイト」を作るのではなくて、  
+>HTMLファイルをプログラム的に「生成」する手法を指す。  
 
 ## あとがき＆今後の予定。
 
