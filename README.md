@@ -254,7 +254,7 @@ IPアドレスもだけど「fingerprint」公開鍵にも注目。「github.com
 
 ### 「push」する前にコミットの内容を確認する。
 
-「git log」でコミットの一覧が表示できます。
+「git log」でコミットの一覧が表示できます。終了する時は「Q」キー。
 
     # cd test
     # git log
@@ -381,11 +381,10 @@ Git使えない人から「ZIPでくれ」と言われても「そこにZIPが�
 つまりOrganizationでもない限り、Webは「master」&#40;username.github.io&#41;一括管理でいいと思います。  
 ブランチ切るほどでもないプロジェクト(リポジトリ)なのにブランチ管理で悩むリソース消費を回避する方がベターかと。  
 
-### Pages&#40;username.github.io&#41;の場合「Initialize this repository with a README」にチェックを入れない。
+### Pages&#40;username.github.io&#41;の場合でも「Initialize this repository with a README」にチェックを入れるっぽい。警告出てくる。
 
-「README.md」とか無い空のリポジトリが作成された場合「Quick setup」の画面とかでる。  
-空ですよ警告&#40;empty repository.&#41;とか気にせず「git clone github:username/username.github.io.git」。  
-リポジトリがクローンできたら後はコミットしてプッシュ。やることは同じ。  
+「README.md」がリポジトリに存在しないと「Quick setup」の画面とかいつもと違う画面が混乱なので「README.md」の構成とか草埋めする。  
+「git clone github:username/username.github.io.git」リポジトリがクローンできたら後はコミットしてプッシュ。やることは同じ。  
 
     # cd /mnt/sdb1/github/
     # git clone github:ooblog/ooblog.github.io.git
@@ -511,5 +510,6 @@ HTMLの書き方というか、新規のサイトは思いきって古いブラ�
 
 執筆者もGitHub勉強中。  
 GitについてググってもGitHub以前の情報だったり断片的だったりvi前提だったり不便だったのでまとめた。  
-ブランチ管理は午後の部という形で別mdだと思う。  
+[ブランチ管理は午前の部で解説](README_gogo.md)
+
 

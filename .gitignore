@@ -61,6 +61,8 @@ target/
 #Ipython Notebook
 .ipynb_checkpoints
 
-#gh-pages
+# git push github:ooblog/test.git master
+# git log
+# git commit -a -m ""
 gh-pages/
 
