@@ -311,7 +311,7 @@ IPアドレスもだけど「fingerprint」公開鍵にも注目。「github.com
 
 ### ローカル「Git」のbranchを「GitHub」に「push」する。
 
-「git clone」した同じリポジトリに今度は「git push」する(「origin」使わない方法で説明)。  
+「git clone」した同じリポジトリに今度は「git push」する(「origin」の説明は午後の部)。  
 「configホスト名:ユーザID/.git」このフォーマット先述の「clone」の説明でも使いました。  
 「master」ってのはブランチbranchの名前。枝分かれしてないので「master」の更新。  
 
@@ -510,6 +510,6 @@ HTMLの書き方というか、新規のサイトは思いきって古いブラ�
 
 執筆者もGitHub勉強中。  
 GitについてググってもGitHub以前の情報だったり断片的だったりvi前提だったり不便だったのでまとめた。  
-[ブランチ管理は午前の部で解説](README_gogo.md)
 
+→[ブランチ管理は午前の部で解説](README_gogo.md)  
 
