@@ -10,6 +10,18 @@
 
 ちょっと直すだけだからmasterブランチに直接コミットでいいやと思って泥沼にハマり、  
 手動でバックアップコピー取ってからの「git log」でハッシュ確認し「git reset --hard」の使い方覚えた人挙手。  
+さらに「reset --hard」したのがpush後だったので「rejected」発動し「--force」の力技で押しきった人は両手上げるー＼&#40;&#94;o&#94;&#41／;  
+
+[non-fast forward エラーで強制的にpushする](http://blog.digital-squad.net/article/132085683.html)
+>gitでリポジトリにpushしようとしたときにnon-fast forwardという下記のようなエラーがでてpushできないことがある。  
+>git push origin master  
+>! [rejected] master -> master (non-fast forward)  
+>error: failed to push some refs to 'ssh://user@remotehost.git'  
+>こういうときは --forceオプションをつけてやることで強制的にpushできる。  
+>git push origin master --force  
+>git pullやgit fetchなどで、push先のリポジトリとローカルのワークツリーをマージすることで整合性を合わせることが望ましいが  
+>--forceオプションをつけることで強制的にpushすることができる。  
+>なんでこうなるかというと、push先のコミットの子孫でない場合にnon-fast forwardエラーが出る。  
 
 ### ブランチの作成とブランチの確認が同じ「branch」コマンドなので注意。
 
@@ -31,11 +43,38 @@
     * 20160328M231906
       master
 
+### 「checkout -b」でもブランチ作成できるが、master以外のブランチの「clone」用途で使う。
+
+    # git branch
+    * master
+    # git branch -r
+      origin/HEAD -> origin/master
+      origin/master
+      origin/20160328M231906
+    # git checkout -b 20160328M231906 origin/20160328M231906
+    Branch 20160328M231906 set up to track remote branch 20160328M231906 from origin.
+    Switched to a new branch '20160328M231906'
+    # git branch
+      master
+    * 20160328M231906
+
+[リモートのブランチをcloneする](http://qiita.com/shim0mura/items/85aa7fc762112189bd73)
+>リポジトリをcloneしてきたとする。  
+>で、git branchすればわかるんだけど、このままだとmasterブランチしかローカルにcloneできてない。  
+>まず git branch -r でリモートのブランチ名を調べる。  
+>$ git branch -r  
+>origin/HEAD -> origin/master  
+>origin/development  
+>origin/master  
+>お目当てのブランチ名を探し（この場合は「origin/development」）、こいつを以下のようにすればOK。  
+>git checkout -b development origin/development  
+>checkoutの第一引数にローカルリポジトリでのブランチ名を、第二引数に落としたいブランチ名を指定する。  
+
 ### ブランチ名の変更は「branch -m」。
 
 [git: ローカルのブランチ名を変更したい](http://qiita.com/suin/items/96c110b218d919168d64)
->今開いているブランチをリネームする場合は、単純に新しいブランチ名を指定するだけです。
->git branch -m <新しいブランチ名>
+>今開いているブランチをリネームする場合は、単純に新しいブランチ名を指定するだけです。  
+>git branch -m <新しいブランチ名>  
 
 ### ブランチの削除は「branch -d」(もしくは「branch -D」)。
 
@@ -177,3 +216,4 @@ pushは今まで通り。
 
 執筆者もGitHub勉強中。  
 ブランチ管理が必要になったのでとりあえず最小限メモ書き。  
+
