@@ -10,7 +10,7 @@
 
 ちょっと直すだけだからmasterブランチに直接コミットでいいやと思って泥沼にハマり、  
 手動でバックアップコピー取ってからの「git log」でハッシュ確認し「git reset --hard」の使い方覚えた人挙手。  
-さらに「reset --hard」したのがpush後だったので「rejected」発動し「--force」の力技で押しきった人は両手上げるー＼&#40;&#94;o&#94;&#41／;  
+さらに「reset --hard」したのがpush後だったので「rejected」発動し「--force」の力技で押しきった人は両手上げるー＼&#40;&#94;o&#94;&#41;／  
 
 [non-fast forward エラーで強制的にpushする](http://blog.digital-squad.net/article/132085683.html)
 >gitでリポジトリにpushしようとしたときにnon-fast forwardという下記のようなエラーがでてpushできないことがある。  
