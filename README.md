@@ -1,6 +1,6 @@
 # 「test」テストリポジトリ〜その日の午前中にGitHubを使えるようになってもらうマニュアル。
 
-「README.md」をコミットできる事を確認するまでがGitHubの初期設定です。  
+「README.md」をコミットできる事を確認するまでがGitHubの初期設定です。
 
 
 ## 前提。なぜGitHubの時代が来た？
@@ -10,7 +10,7 @@ zipをメールやFTP(平文)で送るみたいな危なっかしいやり方を
 Gitならzipの解凍とかしなくてもコミットした所まで巻き戻せるし差分管理も自動化できる。  
 コミットをRPGなどでセーブする行為に喩えると、詰みセーブ回避のためセーブデータの小分けがブランチに該当する的な。  
 
-[カドカワ、ネットの高校「N高等学校」を2016年4月開校](http://internet.watch.impress.co.jp/docs/news/20151014_725640.html)
+[カドカワ、ネットの高校「N高等学校」を2016年4月開校](http://internet.watch.impress.co.jp/docs/news/20151014_725640.html)  
 >生徒全員にメールアドレス、Slack、GitHubアカウントを発行。  
 >生徒間の日常コミュニケーションはSlackで行い、創作物やレポートはGitHubで提出する。  
 
@@ -21,7 +21,7 @@ Gitならzipの解凍とかしなくてもコミットした所まで巻き戻�
 >公開鍵と秘密鍵が「逆に使える」というのはRSAアルゴリズムがたまたま（まあまあ）そうなだけであって、  
 >そのような性質を持たない他の公開鍵暗号方式がたくさん存在する。  
 
-[スパイク・チュンソフト中村光一氏と長畑成一郎氏が語るゲームの「編集」](http://news.denfaminicogamer.jp/projectbook/dungeon/3)
+[スパイク・チュンソフト中村光一氏と長畑成一郎氏が語るゲームの「編集」](http://news.denfaminicogamer.jp/projectbook/dungeon/3)  
 >ゲーム実況でも『シレン』は人気が高いんですよ。編集部で「風来救助隊」ってネット向きだよね、という話をしていたんです。  
 >このゲームのプログラムは1ターンずつの情報を全て覚えている仕組みなんです。実はセーブの際に、こっちの方がメモリが少なくて済んだんですよ。  
 >どこに何が置いてあるのかの情報を全て取得するより、何をやったかだけを蓄積していく方が、総容量が少ないので簡単にセーブできてしまうんですね。  
@@ -61,14 +61,14 @@ GitHub(Git)使うにはOpenSSLの脆弱性注意。OS毎のセキュリティア
 [Puppy Linux Precise-571JP の OpenSSL を更新](http://near-unix.blogspot.jp/2014/04/puppy-linux-precise-571jp-openssl.html)  
 >上書きインストールが完了しましたらバージョンチェックをします。  
 >urxvt上からOpenSSLのバージョン確認コマンド（ビルド時刻の表示オプション付き）を実行します。  
->openssl version &#45;b
+>openssl version &#45;b  
 
 
 ## SSH鍵はパスワードみたいなもの。最初から複数の鍵を使い分ける事を想定して環境を整える。
 
 ### 「ssh&#45;keygen」で「~/.ssh/」に公開鍵.pubと秘密鍵を作成する。
 
-任意に名前を付けた鍵を作成する。  
+任意に名前を付けた鍵を作成する。
 鍵自体にもパスフレーズ(パスワード)が設置でき、さらにそのパスフレーズ入力手間省く裏技まで存在するっぽいが、  
 最初からパスフレーズ入力を省略。  
 
@@ -77,14 +77,21 @@ GitHub(Git)使うにはOpenSSLの脆弱性注意。OS毎のセキュリティア
 鍵を作成すると「~/.ssh/」フォルダができる。  
 「~/.ssh/」フォルダ内に公開鍵.pubと公開鍵と同名で拡張子の無い秘密鍵が作成される。  
 
-[SSH-KEYGEN (1)](http://euske.github.io/openssh-jman/ssh-keygen.html)
+[SSH-KEYGEN (1)](http://euske.github.io/openssh-jman/ssh-keygen.html)  
 >~/.ssh/id&#95;rsa 秘密鍵ファイルのデフォルトの名前としてこれが提案されます。  
 >&#45;f ファイル名 鍵を格納するファイル名を指定します。  
 >&#45;t 生成する鍵の種類を指定します。プロトコルバージョン 2 で使う"dsa","ecdsa","ed25519"または"rsa"があります。  
 >コメントは"user@host"の形に初期化されますが、-c オプションを使えば変更することができます。  
 >&#40;訳注: SSH2 の鍵にはコメントはありません&#41;  
 
-鍵を作ったら右クリックからのプロパティとかで書き込み禁止。  
+鍵を作ったら右クリックからのプロパティや「chmod 0600」コマンドなどで第三者からの書き込み禁止。  
+
+[MacでSSH公開鍵・秘密鍵ファイルをコピーして使ったら警告がでた](http://blog.ruedap.com/2011/04/04/mac-ssh-key-copy-error)  
+>git pushしようとしたら、こんな警告が出た。  
+>WARNING: UNPROTECTED PRIVATE KEY FILE!  
+>パーミッションを0600に変えてあげれば大丈夫ってのをちらほら見かけたので、その通りにしてみる。  
+>$ chmod 0600 ~/.ssh/id_rsa  
+>これでもう一度git pushしてみたら、今度はいつもどおりにpushできた。  
 
 
 ### 「~/.ssh/config」ファイル作成して鍵を管理する。
@@ -99,7 +106,7 @@ GitHub(Git)使うにはOpenSSLの脆弱性注意。OS毎のセキュリティア
         IdentitiesOnly yes
         Compression    yes
 
-[SSH_CONFIG (5)](http://euske.github.io/openssh-jman/ssh_config.html)
+[SSH_CONFIG (5)](http://euske.github.io/openssh-jman/ssh_config.html)  
 >キーワードと引数は、空白またはひとつの = (間に空白を含んでいてもよい) によって区切られます。  
 >空白を含む引数は、ダブルクォートで囲んで表現することもできます。  
 >Host &#40;ホスト&#41; 設定項目を、ここで指定されたパターンのどれかにマッチするホストだけに制限します。  
@@ -124,7 +131,7 @@ GitHubに登録したメールアドレスとユーザIDをローカルのGitに
     # git config --global user.name  ユーザID
     # git config --global user.email メールアドレス
 
-[1.5 使い始める - 最初のGitの構成](https://git-scm.com/book/ja/v1/%E4%BD%BF%E3%81%84%E5%A7%8B%E3%82%81%E3%82%8B-%E6%9C%80%E5%88%9D%E3%81%AEGit%E3%81%AE%E6%A7%8B%E6%88%90)
+[1.5 使い始める - 最初のGitの構成](https://git-scm.com/book/ja/v1/%E4%BD%BF%E3%81%84%E5%A7%8B%E3%82%81%E3%82%8B-%E6%9C%80%E5%88%9D%E3%81%AEGit%E3%81%AE%E6%A7%8B%E6%88%90)  
 >--globalオプションを指定するのであれば、この操作を行なう必要はたった一度だけです。  
 >違う名前とE&#45;mailアドレスを特定のプロジェクトで上書きしたいのであれば、  
 >プロジェクトの&#40;訳者注：Gitディレクトリの&#41;中で、--globalオプション無しでこのコマンドを実行することができます。  
@@ -138,8 +145,8 @@ GitHubに登録したメールアドレスとユーザIDをローカルのGitに
 
 先頭の「ssh-rsa 」を含めたテキストをGitHubの「New SSH key」に張り付ける。末尾のホスト名は省略可能。  
 
-[SSH keys](https://github.com/settings/ssh)
->This is a list of SSH keys associated with your account
+[SSH keys](https://github.com/settings/ssh)  
+>This is a list of SSH keys associated with your account  
 
 
 ### 「github」と接続テストを行う。
@@ -156,13 +163,14 @@ IPアドレスもだけど「fingerprint」公開鍵にも注目。「github.com
     Warning: Permanently added 'github.com,192.30.252.129' (RSA) to the list of known hosts.
     Hi ooblog! You've successfully authenticated, but GitHub does not provide shell access.
 
-[Testing your SSH connection](https://help.github.com/articles/testing-your-ssh-connection/)
->Verify that the fingerprint in the message you see matches the following message, then type yes
+[Testing your SSH connection](https://help.github.com/articles/testing-your-ssh-connection/)  
+>Verify that the fingerprint in the message you see matches the following message, then type yes  
 
 
 ## 「git clone」の方が簡単なので「GitHub」でリポジトリを作る。
 
-[https://github.com/new](https://github.com/new "Create a New Repository")
+[https://github.com/new](https://github.com/new "Create a New Repository")  
+>A repository contains all the files for your project, including the revision history.   
 
 「GitHub」でリポジトリを作ると「LICENSE」ファイルなどが自動作成されるので便利。  
 
@@ -171,30 +179,31 @@ IPアドレスもだけど「fingerprint」公開鍵にも注目。「github.com
 
 ライセンスは訴訟回避の法的おまじない。ここは空気を読んで既存のオープンソースライセンスに寄せておくのがベター。  
 
-[Githubによる、オープンソースライセンスの選び方](http://www.catch.jp/oss-license/2013/09/10/github/)
+[Githubによる、オープンソースライセンスの選び方](http://www.catch.jp/oss-license/2013/09/10/github/)  
 >現在のGithubでは、新しいレポジトリを作るときに公開レポジトリ(Public)を選択すると、  
 >Gitで無視させるファイル(gitignore)とライセンスを選択できるようになっています。  
 >Githubが設置したライセンス選択サイト「Choosing an OSS license doesn’t need to be scary」  
 >オープンソースにするつもりがないにも関わらず、公開リポジトリを利用している人に、注意を促しています。  
 >パブリックリポジトリで公開する場合、あなたは、Githubの利用条件に同意して、  
 >他のGithubユーザーにいくつかの権利を与えていることになります。  
->ライセンスを選ぶのが面倒ならば、MITライセンス一択でいいんじゃないでしょうか。
+>ライセンスを選ぶのが面倒ならば、MITライセンス一択でいいんじゃないでしょうか。  
+
 
 ### 開発言語を選択すると「.gitignore」が自動生成され余分なファイルがリポジトリに混入するのを防ぎます。
 
 例えばPythonを選択すると「&#42;.py&#91;cod&#93;」が書き込まれますが「.pyc」「.pyo」「.pyd」の意味です。  
 
 [What is the difference between &#34;py&#91;cod&#93;&#34; and &#34;pyc&#34; in .gitignore notation?](http://stackoverflow.com/questions/18729510/what-is-the-difference-between-pycod-and-pyc-in-gitignore-notation)
->You are safe to remove the .pyc entry from your .gitignore, since py&#91;cod&#93; will cover it.
->The square brackets are for matching any one of the characters, so it matches .pyc, .pyo and .pyd.
+>You are safe to remove the .pyc entry from your .gitignore, since py&#91;cod&#93; will cover it.  
+>The square brackets are for matching any one of the characters, so it matches .pyc, .pyo and .pyd.  
 
 
 ### 「README.md」は「reddit」みたいに「半角スペース2つで改行」。
 
 「.md」ファイルはGitHub上でも編集できるけど、「commit」「push」の練習に使う。  
-コード表示だと改行自動だけど引用には半角スペース改行が必要なので注意。
+コード表示だと改行自動だけど引用には半角スペース改行が必要なので注意。  
 
-[README.mdファイル。マークダウン記法まとめ](http://codechord.com/2012/01/readme-markdown/)
+[README.mdファイル。マークダウン記法まとめ](http://codechord.com/2012/01/readme-markdown/)  
 >見出し 行頭の#の個数でH1～H6を表す。  
 >改行 行末に2つのスペースを入れる。  
 >コード表示（等幅フォントで表示）半角スペースを4つ行頭に  
@@ -207,6 +216,7 @@ IPアドレスもだけど「fingerprint」公開鍵にも注目。「github.com
 >その他の注意 &amp;マークなどは「&amp;amp&#59;」に変換しておく。  
 
 「[kantray](https://github.com/ooblog/LTsv9kantray)」を使うと「照&#95;⇔&#38;#95&#59;」とかの機能あるのでお勧め。  
+
 
 ### 「GitHub」で作ったリポジトリをローカルの「Git」に「clone」する。
 
@@ -237,9 +247,10 @@ IPアドレスもだけど「fingerprint」公開鍵にも注目。「github.com
 「test.git」を編集する時は「test」フォルダに移動してから「commit」などの作業。  
 「git status」でローカルリポジトリにいるか確認。  
 
+
 ## 「commit」して「push」する。
 
-### 例えば「README.md」を編集すると「git status」が変化する。  
+### 例えば「README.md」を編集すると「git status」が変化する。
 
     # cd test
     # git status
@@ -252,7 +263,7 @@ IPアドレスもだけど「fingerprint」公開鍵にも注目。「github.com
     #
     no changes added to commit (use "git add" and/or "git commit -a")
 
-編集したら編集内容についてコメントを残す。  
+編集したら編集内容についてコメントを残す。
 「ニコニコ大百科」で例えると「編集内容についての説明」みたいなもの。  
 
     # git commit -a -m "「git clone」の辺りまで執筆。"
@@ -262,11 +273,11 @@ IPアドレスもだけど「fingerprint」公開鍵にも注目。「github.com
     [master 1064a63] 「git commit -a -m」が成功したので「commit」の項目にもつい加筆 。
      1 file changed, 6 insertions(+), 1 deletion(-)
 
-[Git - 変更内容のリポジトリへの記録](https://git-scm.com/book/ja/v1/Git-%E3%81%AE%E5%9F%BA%E6%9C%AC-%E5%A4%89%E6%9B%B4%E5%86%85%E5%AE%B9%E3%81%AE%E3%83%AA%E3%83%9D%E3%82%B8%E3%83%88%E3%83%AA%E3%81%B8%E3%81%AE%E8%A8%98%E9%8C%B2)
+[Git - 変更内容のリポジトリへの記録](https://git-scm.com/book/ja/v1/Git-%E3%81%AE%E5%9F%BA%E6%9C%AC-%E5%A4%89%E6%9B%B4%E5%86%85%E5%AE%B9%E3%81%AE%E3%83%AA%E3%83%9D%E3%82%B8%E3%83%88%E3%83%AA%E3%81%B8%E3%81%AE%E8%A8%98%E9%8C%B2)  
 >コミットメッセージをインラインで記述することもできます。  
 >その場合は、commit コマンドの後で &#45;m フラグに続けて記述します。  
 >&#45;a オプションを指定すると、追跡対象となっているファイルを自動的にステージしてからコミットを行います。  
->つまり git add を省略できるというわけです。
+>つまり git add を省略できるというわけです。  
 
 コミットできてれば「modified」メッセージは出ないはず。  
 
@@ -278,7 +289,7 @@ IPアドレスもだけど「fingerprint」公開鍵にも注目。「github.com
 
 ### 「push」する前にコミットの内容を確認する。
 
-「git log」でコミットの一覧が表示できます。終了する時は「Q」キー。
+「git log」でコミットの一覧が表示できます。終了する時は「Q」キー。  
 
     # cd test
     # git log
@@ -327,8 +338,8 @@ IPアドレスもだけど「fingerprint」公開鍵にも注目。「github.com
 
 「reset」でコミット数が減った事が確認できると思う。  
 
-[さっきの取り消したい！って時のGitコマンドまとめ](http://qiita.com/kansiho/items/2bacecdb95d752cb38b7)
->直前の間違ったコミットを取り消したい。  
+[さっきの取り消したい！って時のGitコマンドまとめ](http://qiita.com/kansiho/items/2bacecdb95d752cb38b7)  
+>直前の間違ったコミットを取り消したい。
 >　git reset &#45;&#45;soft HEAD^  
 >git reset &#45;&#45;soft :ワークディレクトリの内容はそのままでコミットだけを取り消す。  
 >git reset &#45;&#45;hard :コミットを取り消し&#38;ワークディレクトリの内容も書き換え。  
@@ -356,13 +367,13 @@ IPアドレスもだけど「fingerprint」公開鍵にも注目。「github.com
 リポジトリのWebページを開くと「README.md」「Initial commit」のテキストが、  
 「git commit &#45;a &#45;m」でコミットしたテキストに変化してれば「push」成功。  
 
-[ooblog/test](https://github.com/ooblog/test)
+[ooblog/test](https://github.com/ooblog/test)  
 
 ちなリポジトリは「Download ZIP」ボタンでもダウンロードができます。  
 Git使えない人から「ZIPでくれ」と言われても「そこにZIPがあるじゃろ？」と挨拶できますね。  
 
 
-## リポジトリにファイルを追加削除もしくはファイル名をリネームする。  
+## リポジトリにファイルを追加削除もしくはファイル名をリネームする。
 
 リポジトリフォルダにファイルを追加する前に「.gitignore」に公開したくないファイル名を登録。  
 フォルダにファイルを追加したら「git add .」。  
@@ -387,12 +398,12 @@ Git使えない人から「ZIPでくれ」と言われても「そこにZIPが�
 
 ### 実際のリポジトリ管理下ファイル一覧の確認は「git ls-files」。
 
-[git ls-files](http://qiita.com/zimathon/items/d964c4b3cc688cb2d114)
->git ls&#45;files
->※git リポジトリのルートからのパスで表示
+[git ls-files](http://qiita.com/zimathon/items/d964c4b3cc688cb2d114)  
+>git ls&#45;files  
+>※git リポジトリのルートからのパスで表示  
 
 
-## ブランチ管理の話とかしてないのに先走って「gh&#45;pages」ブランチ作ったりしない。  
+## ブランチ管理の話とかしてないのに先走って「gh&#45;pages」ブランチ作ったりしない。
 
 いわゆるホームページ作成目的&#40;ブログだけじゃできない事試したい&#41;でGitHub使ってみるって人いるかもなので先に注意。  
 
@@ -401,11 +412,11 @@ Git使えない人から「ZIPでくれ」と言われても「そこにZIPが�
 
 公式にユーザーページ&#40;master&#41;とプロジェクトページ&#40;gh-pages&#41;が被ったらどうなるかまで書いてない気がする。  
 
-[User, Organization, and Project Pages - User Documentation](https://help.github.com/articles/user-organization-and-project-pages/)
+[User, Organization, and Project Pages - User Documentation](https://help.github.com/articles/user-organization-and-project-pages/)  
 >User Pages site 	username.github.io 	master  
 >Project Pages site owned by a user account 	username.github.io/projectname 	gh-pages  
 
-[github pagesとjekyllを今さら練習](http://aligach.net/diary/20120716.html)
+[github pagesとjekyllを今さら練習](http://aligach.net/diary/20120716.html)  
 >github pages は最終的に一つのディレクトリツリー上に展開されているようだ。  
 >username.github.com の github pages を作る際には各 repos の名前空間が conflict することになるので注意が必要。  
 
@@ -437,12 +448,12 @@ Git使えない人から「ZIPでくれ」と言われても「そこにZIPが�
      * [new branch]      master -> master
 
 
-### 「index.html」に加え「404.html」もルートフォルダに必要。  
+### 「index.html」に加え「404.html」もルートフォルダに必要。
 
 [GitHub Pages - Websites for you and your projects, hosted directly from your GitHub repository. Just edit, push, and your changes are live.](https://pages.github.com/)  
 [Creating a custom 404 page for your GitHub Pages site - User Documentation](https://help.github.com/articles/creating-a-custom-404-page-for-your-github-pages-site/)  
 
-とりあえずのたたき台でも２枚HTMLを作るのでCSSも作っておくと便利。
+とりあえずのたたき台でも２枚HTMLを作るのでCSSも作っておくと便利。  
 
 
 #### サンプル「index.html」
@@ -540,8 +551,8 @@ HTMLの書き方というか、新規のサイトは思いきって古いブラ�
 あとHTMLを手書きではなくプログラミングツールで生成する方法とかあるけどGitとは別の話。  
 
 [静的サイト生成という「古くて新しい手法」の復活](http://mojix.org/2012/12/07/static-site-generation)
->「静的サイト生成」とは、手作りで「静的サイト」を作るのではなくて、  
->HTMLファイルをプログラム的に「生成」する手法を指す。  
+>「静的サイト生成」とは、手作りで「静的サイト」を作るのではなくて、
+>HTMLファイルをプログラム的に「生成」する手法を指す。
 
 
 ## あとがき＆今後の予定。
